@@ -6,4 +6,9 @@ class ApplicationController < Sinatra::Base
     { message: "Thanks!" }.to_json
   end
 
+  get "/employee" do
+    employees = Employee.all
+    employees.to_json
+  end
+
 end
