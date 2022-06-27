@@ -3,23 +3,44 @@ require 'pry'
 class DailyNote < ActiveRecord::Base
     belongs_to :employee
 
+    def self.inventory_needs
+        all.map {|n| n.needs}
+    end
+
     def day_of_the_week
         day = self.created_on.wday
-            if day == 0
-                puts "Sunday"
-            elsif day == 1
-                puts "Monday"
-            elsif day == 2
-                puts "Tuesday"
-            elsif day == 3
-                puts "Wednesday"
-            elsif day == 4
-                puts "Thursday"
-            elsif day == 5
-                puts "Friday"
-            elsif day == 6
-                puts "Saturday"
+            case day
+            when 0    
+                "Sunday"
+            when 1
+                "Monday"
+            when 2
+                "Tuesday"
+            when 3
+                "Wednesday"
+            when 4
+                "Thursday"
+            when 5
+                "Friday"
+            when 6
+                "Saturday"
             else
+        end
+    end
+
+    def whats_left
+        if self.pastry_soldout
+            puts "SOLD OUT!"
+        else
+            self.leftover_pastry
+        end
+    end
+
+    def sold_out_whatday
+        if self.pastry_soldout
+            "We sold out #{day_of_the_week}"
+        else
+            "Didn't sellout #{day_of_the_week}"
         end
     end
 
