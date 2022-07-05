@@ -8,6 +8,11 @@ class ApplicationController < Sinatra::Base
     employees.to_json
   end
 
+  get '/employees/:id' do
+    daily_note = Employee.find(params[:id])
+    daily_note.to_json(include: :dailyNotes)
+  end
+  
   post "/employees" do
     employee = Employee.create(
       first_name: params[:first_name],
