@@ -5,10 +5,10 @@ class ApplicationController < Sinatra::Base
 
   get "/employees" do
     employees = Employee.all
-    employees.to_json
+    employees.to_json(include: :dailyNotes)
   end
 
-  get '/employees/:id' do
+  get "/employees/:id" do
     daily_note = Employee.find(params[:id])
     daily_note.to_json(include: :dailyNotes)
   end
@@ -19,6 +19,12 @@ class ApplicationController < Sinatra::Base
       last_name: params[:last_name],
       email_address: params[:email_address]
     )
+    employee.to_json
+  end
+
+  delete "/employees/:id" do
+    employee = Employee.find(params[:id])
+    employee.destroy
     employee.to_json
   end
 
