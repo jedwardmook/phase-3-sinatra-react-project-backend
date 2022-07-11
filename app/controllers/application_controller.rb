@@ -49,8 +49,13 @@ class ApplicationController < Sinatra::Base
       created_on: params[:created_on],
       employee_id: params[:employee_id],
     )
+    daily_note.to_json 
+  end
+
+  delete "/daily_notes/:id" do
+    daily_note = DailyNote.find(params[:id])
+    daily_note.destroy
     daily_note.to_json
-    
   end
 
 end
