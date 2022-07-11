@@ -38,4 +38,19 @@ class ApplicationController < Sinatra::Base
     daily_note.to_json
   end
 
+  post "/daily_notes" do
+    daily_note = DailyNote.create(
+      coffee_notes: params[:coffee_notes],
+      needs: params[:needs],
+      items_86ed: params[:items_86ed],
+      pastry_soldout: params[:pastry_soldout],
+      leftover_pastry: params[:leftover_pastry],
+      miscellaneous: params[:miscellaneous],
+      created_on: params[:created_on],
+      employee_id: params[:employee_id],
+    )
+    daily_note.to_json
+    
+  end
+
 end
