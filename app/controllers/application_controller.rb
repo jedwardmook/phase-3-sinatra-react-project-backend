@@ -39,7 +39,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/daily_notes" do
-    daily_notes = DailyNote.all.order(:created_on)
+    daily_notes = DailyNote.all.order(created_on: :desc)
     daily_notes.to_json(include: :employee)
   end
 
