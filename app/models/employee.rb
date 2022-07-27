@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-    has_many :dailyNotes
+    has_many :dailyNotes, dependent: :destroy
 
     def self.employee_list
         all.map {|n| n.full_name}

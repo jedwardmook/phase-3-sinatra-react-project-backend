@@ -1,4 +1,3 @@
-require 'pry'
 
 class DailyNote < ActiveRecord::Base
     belongs_to :employee
@@ -31,6 +30,7 @@ class DailyNote < ActiveRecord::Base
     def whats_left
         if self.pastry_soldout
             puts "SOLD OUT!"
+            "Sold out!"
         else
             self.leftover_pastry
         end
