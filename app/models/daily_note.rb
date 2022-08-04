@@ -3,7 +3,7 @@ class DailyNote < ActiveRecord::Base
     belongs_to :employee
 
     def self.inventory_needs
-        all.map {|n| n.needs}
+        all.map {|n| "#{n.day_of_the_week} - #{n.created_on.strftime("%m/%d/%Y")}: #{n.needs}"}
     end
 
     def day_of_the_week
